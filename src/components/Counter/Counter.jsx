@@ -32,6 +32,12 @@ const Counter = function Counter({ initialCount }) {
   // useMemo here to only execute isPrime if initialCount changed
   const initialCountIsPrime = useMemo(() => isPrime(initialCount), [initialCount]);
 
+  // instead of using useEffect to rerender this component when the initialCount changes (which will cause unnecessary rerender), use a key on the component (where it's called in <App/>)
+  // and when that key changes, the component will rerender
+  // useEffect(() => {
+  //   setCounter(initialCount)
+  // }, [initialCount])
+
   const [counter, setCounter] = useState(initialCount);
 
   const handleDecrement = useCallback(function handleDecrement() {
